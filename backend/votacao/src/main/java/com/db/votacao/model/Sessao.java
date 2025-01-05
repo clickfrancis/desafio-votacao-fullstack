@@ -9,15 +9,17 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.CascadeType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "sessao")
+@Table(name = "sessoes")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sessao {
@@ -36,9 +38,8 @@ public class Sessao {
     @JoinColumn(name = "pauta_id", nullable = false)
     private Pauta pauta;
 
-    @OneToMany
-    @JoinColumn(name = "voto_id", nullable = false)
-    private Voto voto;
+    @OneToMany(mappedBy = "sessao", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Voto> votos;
 
     public void verificaTempoFechamentoSessao(Integer tempoSessao) {
         if (tempoSessao == null) {

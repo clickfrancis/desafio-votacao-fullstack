@@ -32,6 +32,9 @@ public class Pauta {
     @JoinColumn(name = "assembleia_id", nullable = false)
     private Assembleia assembleia;
 
+    @OneToMany(mappedBy = "pauta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Voto> votos;
+
     @OneToMany(mappedBy = "pauta", cascade = CascadeType.ALL)
     private List<Sessao> sessoesVotacao;
 }

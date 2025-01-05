@@ -38,6 +38,10 @@ public class Voto {
     private Sessao sessao;
 
     @ManyToOne
+    @JoinColumn(name = "pauta_id", nullable = false)
+    private Pauta pauta;
+
+    @ManyToOne
     @JoinColumn(name = "associado_id", nullable = false)
     private Associado associado;
 

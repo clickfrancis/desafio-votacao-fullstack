@@ -1,6 +1,8 @@
 package com.db.votacao.controller;
 
 import com.db.votacao.model.Assembleia;
+import com.db.votacao.model.dto.request.AssembleiaRequestDTO;
+import com.db.votacao.model.dto.response.AssembleiaResponseDTO;
 import com.db.votacao.service.AssembleiaService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,9 @@ public class AsssembleiaController {
     private AssembleiaService assembleiaService;
 
     @PostMapping
-    public ResponseEntity<Assembleia> criarAssembleia(@RequestBody Assembleia assembleia) {
-        Assembleia novaAssembleia = assembleiaService.criarAssembleia(assembleia);
-        return ResponseEntity.status(HttpStatus.CREATED).body(assembleia);
+    public ResponseEntity<AssembleiaResponseDTO> criarAssembleia(@RequestBody AssembleiaRequestDTO assembleia) {
+        AssembleiaResponseDTO novaAssembleia = assembleiaService.criarAssembleia(assembleia);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaAssembleia);
     }
 
     @GetMapping("/{id}")
@@ -32,8 +34,8 @@ public class AsssembleiaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Assembleia>> listarAssembleias() {
-        List<Assembleia> assembleias = assembleiaService.listarAssembleias();
+    public ResponseEntity<List<AssembleiaResponseDTO>> listarAssembleias() {
+        List<AssembleiaResponseDTO> assembleias = assembleiaService.listarAssembleias();
         return ResponseEntity.status(HttpStatus.OK).body(assembleias);
     }
 }

@@ -51,11 +51,11 @@ public class VotacaoService {
         Voto voto = new Voto(sessao, associado, votoOpcao);
         return votoRepository.save(voto);
     }
-
+/*
     public String contabilizarResultado(Long pautaId) {
 
-        long votosSim = votoRepository.countByPautaAndVotoOpcao(pautaId, VotoOpcao.SIM);
-        long votosNao = votoRepository.countByPautaAndVotoOpcao(pautaId, VotoOpcao.NAO);
+        long votosSim = votoRepository.countByPautaAndVotoOpcao(pautaId, "SIM");
+        long votosNao = votoRepository.countByPautaAndVotoOpcao(pautaId, "NAO");
 
         if (votosSim > votosNao) {
             return "A votação foi aprovada com " + votosSim + " votos a favor e " + votosNao + " votos contra.";
@@ -64,5 +64,5 @@ public class VotacaoService {
         } else {
             return "A votação empatou com " + votosSim + " votos a favor e " + votosNao + " votos contra.";
         }
-    }
+    } */
 }

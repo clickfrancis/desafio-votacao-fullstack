@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface VotoRepository extends JpaRepository<Voto, Long> {
     Optional<Voto> findByPautaAndAssociado(Pauta pauta, Associado associado);
 
-    long countByPautaAndVotoOpcao(Long pautaId, VotoOpcao votoOpcao);
+   // long countByPautaAndVotoOpcao(Long pautaId, String votoOpcao);
 }

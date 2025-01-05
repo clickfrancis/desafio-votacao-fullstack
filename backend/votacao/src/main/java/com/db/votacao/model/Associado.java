@@ -6,7 +6,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Enumerated;
@@ -14,14 +13,16 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.CascadeType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+import java.util.List;
 import java.util.Random;
 
 @Data
 @Entity
 @Table(name = "associados")
-@AllArgsConstructor
+@NoArgsConstructor
 public class Associado {
 
     @Id
@@ -39,10 +40,7 @@ public class Associado {
     private StatusAssociado status;
 
     @OneToMany(mappedBy = "associado", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "voto_id", nullable = false)
-    private Voto voto;
-
-
+    private List<Voto> votos;
 
     private StatusAssociado determinarStatusVotoAleatorio() {
         Random random = new Random();
