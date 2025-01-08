@@ -9,7 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface VotoRepository extends JpaRepository<Voto, Long> {
-    Optional<Voto> findByPautaAndAssociado(Pauta pauta, Associado associado);
 
-   // long countByPautaAndVotoOpcao(Long pautaId, String votoOpcao);
+    Optional<Voto> findByPautaAndAssociado(Pauta pauta, Associado associado);
+    Optional<Voto> findBySessaoIdAndAssociadoId(Long sessaoId, Long associadoId);
+
+
+    // long countByPautaAndVotoOpcao(Long pautaId, String votoOpcao);
 }

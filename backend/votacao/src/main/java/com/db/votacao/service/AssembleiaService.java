@@ -31,12 +31,11 @@ public class AssembleiaService {
 
     }
 
-    public Assembleia obterAssembleia(Long id) {
-        Optional<Assembleia> assembleia = assembleiaRepository.findById(id);
-        if (assembleia.isEmpty()) {
-            throw new RuntimeException("Assembleia não encontrada com ID: " + id);
-        }
-        return assembleia.get();
+    public AssembleiaResponseDTO obterAssembleia(Long id) {
+        Assembleia assembleia = assembleiaRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Assembleia não encontrada com ID: " + id));
+
+        return assembleiaMapper.toResponseDTO(assembleia);
     }
 
     public List<AssembleiaResponseDTO> listarAssembleias() {

@@ -37,4 +37,5 @@ public class SessaoController {
         Sessao sessao = sessaoVotacaoService.buscarSessaoPorId(sessaoId);
         return ResponseEntity.status(HttpStatus.OK).body(sessao);
     }
+
 }

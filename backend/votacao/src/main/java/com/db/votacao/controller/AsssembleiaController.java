@@ -28,8 +28,8 @@ public class AsssembleiaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Assembleia> obterAssembleia(@PathVariable Long id) {
-        Assembleia assembleia = assembleiaService.obterAssembleia(id);
+    public ResponseEntity<AssembleiaResponseDTO> obterAssembleia(@PathVariable Long id) {
+        AssembleiaResponseDTO assembleia = assembleiaService.obterAssembleia(id);
         return ResponseEntity.status(HttpStatus.OK).body(assembleia);
     }
 

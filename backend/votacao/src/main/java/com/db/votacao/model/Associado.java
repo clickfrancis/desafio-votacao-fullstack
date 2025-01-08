@@ -42,7 +42,7 @@ public class Associado {
     @OneToMany(mappedBy = "associado", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Voto> votos;
 
-    private StatusAssociado determinarStatusVotoAleatorio() {
+    public StatusAssociado determinarStatusVotoAleatorio() {
         Random random = new Random();
         return random.nextBoolean() ? StatusAssociado.ABLE_TO_VOTE : StatusAssociado.UNABLE_TO_VOTE;
     }

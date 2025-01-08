@@ -1,8 +1,8 @@
 package com.db.votacao.mapper;
 
-import com.db.votacao.model.Assembleia;
 import com.db.votacao.model.Pauta;
 import com.db.votacao.model.dto.request.PautaRequestDTO;
+import com.db.votacao.model.dto.response.AssembleiaResponseDTO;
 import com.db.votacao.model.dto.response.PautaResponseDTO;
 import org.springframework.stereotype.Component;
 
@@ -20,11 +20,10 @@ public class PautaMapper {
         this.votoMapper = votoMapper;
     }
 
-    public Pauta toEntity(PautaRequestDTO pautaRequestDTO, Assembleia assembleia) {
+    public Pauta toEntity(PautaRequestDTO pautaRequestDTO) {
         Pauta pauta = new Pauta();
         pauta.setTitulo(pautaRequestDTO.titulo());
         pauta.setDescricao(pautaRequestDTO.descricao());
-        pauta.setAssembleia(assembleia);
         return pauta;
     }
 
@@ -34,7 +33,12 @@ public class PautaMapper {
                 pauta.getId(),
                 pauta.getTitulo(),
                 pauta.getDescricao(),
-                null,
+                pauta.getAssembleia() != null ? new AssembleiaResponseDTO(
+                        pauta.getAssembleia().getId(),
+                        pauta.getAssembleia().getNome(),
+                        pauta.getAssembleia().getDataCriacao(),
+                        null
+                ) : null,
                 sessaoMapper.toListSessaoResponseDTO(pauta.getSessoesVotacao()),
                 votoMapper.toListVotoResponseDTO(pauta.getVotos())
 
