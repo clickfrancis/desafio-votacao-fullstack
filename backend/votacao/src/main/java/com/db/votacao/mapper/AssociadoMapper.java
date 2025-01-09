@@ -20,8 +20,7 @@ public class AssociadoMapper {
 
     public AssociadoResponseDTO toResponseDTO(Associado associado) {
 
-        List<Long> votoIds = associado.getVotos().stream()
-                .map(Voto::getId)
+        List<Voto> votos = associado.getVotos().stream()
                 .toList();
 
         return new AssociadoResponseDTO(
@@ -29,7 +28,7 @@ public class AssociadoMapper {
                 associado.getNome(),
                 associado.getCpf(),
                 associado.getStatus(),
-                votoIds
+                votos
         );
     }
 
