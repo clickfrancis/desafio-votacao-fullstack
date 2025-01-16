@@ -1,10 +1,13 @@
 package com.db.votacao.mapper;
 
+import com.db.votacao.model.Assembleia;
 import com.db.votacao.model.Sessao;
+import com.db.votacao.model.dto.request.SessaoRequestDTO;
 import com.db.votacao.model.dto.response.SessaoResponseDTO;
 import com.db.votacao.model.dto.response.VotoResponseDTO;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

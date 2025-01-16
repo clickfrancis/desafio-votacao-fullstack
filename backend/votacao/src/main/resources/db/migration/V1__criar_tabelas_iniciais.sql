@@ -32,10 +32,10 @@ CREATE TABLE votos (
     id SERIAL PRIMARY KEY,
     voto VARCHAR(10) NOT NULL,
     sessao_id BIGINT NOT NULL,
-    pauta_id BIGINT NOT NULL,  -- Adicionando a coluna pauta_id
+    pauta_id BIGINT NOT NULL,
     associado_id BIGINT NOT NULL,
     FOREIGN KEY (sessao_id) REFERENCES sessoes(id),
-    FOREIGN KEY (pauta_id) REFERENCES pautas(id), -- Adicionando a chave estrangeira para pauta
+    FOREIGN KEY (pauta_id) REFERENCES pautas(id),
     FOREIGN KEY (associado_id) REFERENCES associados(id),
     UNIQUE (sessao_id, associado_id)
 );

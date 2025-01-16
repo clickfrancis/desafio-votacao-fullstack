@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/votos")
+@RequestMapping("/v1/api/voto")
 @AllArgsConstructor
 public class VotoController {
 

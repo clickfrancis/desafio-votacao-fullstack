@@ -6,9 +6,6 @@ public record PautaResponseDTO(
         Long id,
         String titulo,
         String descricao,
-        AssembleiaResponseDTO assembleia,
-        List<SessaoResponseDTO> sessoesVotacao,
-        List<VotoResponseDTO>votos
-
+        AssembleiaResponseDTO assembleia
 ) {
 }

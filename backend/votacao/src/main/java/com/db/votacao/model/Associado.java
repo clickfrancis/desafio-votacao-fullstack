@@ -37,7 +37,7 @@ public class Associado {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusAssociado status;
+    private StatusAssociado status = StatusAssociado.ABLE_TO_VOTE;
 
     @OneToMany(mappedBy = "associado", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Voto> votos;

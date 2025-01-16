@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/associados")
+@RequestMapping("/v1/api/associado")
 @AllArgsConstructor
 public class AssociadoController {
 
