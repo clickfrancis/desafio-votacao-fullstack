@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/api/pautas")
+@RequestMapping("/v1/api/pauta")
 @AllArgsConstructor
 public class PautaController {
 

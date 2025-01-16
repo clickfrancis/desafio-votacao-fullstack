@@ -38,10 +38,7 @@ public class PautaMapper {
                         pauta.getAssembleia().getNome(),
                         pauta.getAssembleia().getDataCriacao(),
                         null
-                ) : null,
-                sessaoMapper.toListSessaoResponseDTO(pauta.getSessoesVotacao()),
-                votoMapper.toListVotoResponseDTO(pauta.getVotos())
-
+                ) : null
         );
     }
 }

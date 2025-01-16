@@ -1,6 +1,7 @@
 package com.db.votacao.controller;
 
 import com.db.votacao.model.Sessao;
+import com.db.votacao.model.dto.response.SessaoResponseDTO;
 import com.db.votacao.service.SessaoVotacaoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vi/api/sessao-votacao")
+@RequestMapping("/v1/api/sessao-votacao")
 @AllArgsConstructor
 public class SessaoController {
 
@@ -27,14 +28,14 @@ public class SessaoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Sessao>> listarTodasSessoes() {
-        List<Sessao> sessoes = sessaoVotacaoService.listarTodasSessoes();
+    public ResponseEntity<List<SessaoResponseDTO>> listarTodasSessoes() {
+        List<SessaoResponseDTO> sessoes = sessaoVotacaoService.listarTodasSessoes();
         return ResponseEntity.status(HttpStatus.OK).body(sessoes);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Sessao> buscarSessaoPorId(@PathVariable("id") Long sessaoId) {
-        Sessao sessao = sessaoVotacaoService.buscarSessaoPorId(sessaoId);
+    public ResponseEntity<SessaoResponseDTO> buscarSessaoPorId(@PathVariable("id") Long sessaoId) {
+        SessaoResponseDTO sessao = sessaoVotacaoService.buscarSessaoPorId(sessaoId);
         return ResponseEntity.status(HttpStatus.OK).body(sessao);
     }
 

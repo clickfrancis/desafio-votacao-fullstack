@@ -47,12 +47,7 @@ public class AssociadoService {
 
     public List<AssociadoResponseDTO> listarTodos() {
         return associadoRepository.findAll().stream()
-                .map(associado -> new AssociadoResponseDTO(
-                        associado.getId(),
-                        associado.getNome(),
-                        associado.getCpf(),
-                        associado.getStatus(),
-                        associado.getVotos()))
+                .map(associadoMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 

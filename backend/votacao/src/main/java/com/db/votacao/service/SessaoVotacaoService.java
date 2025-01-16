@@ -1,7 +1,9 @@
 package com.db.votacao.service;
 
+import com.db.votacao.mapper.SessaoMapper;
 import com.db.votacao.model.Pauta;
 import com.db.votacao.model.Sessao;
+import com.db.votacao.model.dto.response.SessaoResponseDTO;
 import com.db.votacao.repository.PautaRepository;
 import com.db.votacao.repository.SessaoRepository;
 import jakarta.transaction.Transactional;
@@ -19,6 +21,8 @@ public class SessaoVotacaoService {
     private final PautaRepository pautaRepository;
     @Autowired
     private final SessaoRepository sessaoRepository;
+    @Autowired
+    private final SessaoMapper sessaoMapper;
 
     @Transactional
     public Sessao abrirSessaoVotacao(Long pautaId, Integer tempoEmMinutos) {
@@ -32,12 +36,14 @@ public class SessaoVotacaoService {
         return sessaoRepository.save(sessaoVotacao);
     }
 
-    public List<Sessao> listarTodasSessoes() {
-        return sessaoRepository.findAll();
+    public List<SessaoResponseDTO> listarTodasSessoes() {
+        List<Sessao> sessao = sessaoRepository.findAll();
+        return sessaoMapper.toListSessaoResponseDTO(sessao);
     }
 
-    public Sessao buscarSessaoPorId(Long sessaoId) {
-        return sessaoRepository.findById(sessaoId)
+    public SessaoResponseDTO buscarSessaoPorId(Long sessaoId) {
+        Sessao sessao = sessaoRepository.findById(sessaoId)
                 .orElseThrow(() -> new RuntimeException("Sessão não encontrada com o ID: " + sessaoId));
+        return sessaoMapper.toResponseDTO(sessao);
     }
 }
