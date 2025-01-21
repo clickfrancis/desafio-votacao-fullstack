@@ -1,86 +1,139 @@
-# Votação
+# Votacao Application
 
-## Objetivo
+Este repositório contém uma aplicação web para gerenciamento de votações. A solução foi desenvolvida utilizando **Java com Spring Boot** para o back-end e **PostgreSQL** como banco de dados. A aplicação está conteinerizada utilizando **Docker** e gerencia a evolução do banco de dados com **Flyway**.
 
-No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias, por votação. Imagine que você deve criar uma solução we para gerenciar e participar dessas sessões de votação.
-Essa solução deve ser executada na nuvem e promover as seguintes funcionalidades através de uma API REST / Front:
+---
 
-- Cadastrar uma nova pauta
-- Abrir uma sessão de votação em uma pauta (a sessão de votação deve ficar aberta por
-  um tempo determinado na chamada de abertura ou 1 minuto por default)
-- Receber votos dos associados em pautas (os votos são apenas 'Sim'/'Não'. Cada associado
-  é identificado por um id único e pode votar apenas uma vez por pauta)
-- Contabilizar os votos e dar o resultado da votação na pauta
+## Funcionalidades
 
-Para fins de exercício, a segurança das interfaces pode ser abstraída e qualquer chamada para as interfaces pode ser considerada como autorizada. A solução deve ser construída em java com Spring-boot e Angular/React conforme orientação, mas os frameworks e bibliotecas são de livre escolha (desde que não infrinja direitos de uso).
+- Cadastro de pautas.
+- Abertura de sessão de votação.
+- Registro de votos (Sim/Não) para uma pauta.
+- Consulta de resultados das votações.
+- Listagem de todas as sessões de votação.
 
-É importante que as pautas e os votos sejam persistidos e que não sejam perdidos com o restart da aplicação.
+---
 
-## Como proceder
+## Tecnologias Utilizadas
 
-Por favor, realize o FORK desse repositório e implemente sua solução no FORK em seu repositório GItHub, ao final, notifique da conclusão para que possamos analisar o código implementado.
+- **Linguagem**: Java 17
+- **Framework**: Spring Boot
+- **Banco de Dados**: PostgreSQL 15
+- **Gerenciamento de Migração**: Flyway
+- **Conteinerização**: Docker
 
-Lembre de deixar todas as orientações necessárias para executar o seu código.
+---
 
-### Tarefas bônus
+## Requisitos
 
-- Tarefa Bônus 1 - Integração com sistemas externos
-  - Criar uma Facade/Client Fake que retorna aleátoriamente se um CPF recebido é válido ou não.
-  - Caso o CPF seja inválido, a API retornará o HTTP Status 404 (Not found). Você pode usar geradores de CPF para gerar CPFs válidos
-  - Caso o CPF seja válido, a API retornará se o usuário pode (ABLE_TO_VOTE) ou não pode (UNABLE_TO_VOTE) executar a operação. Essa operação retorna resultados aleatórios, portanto um mesmo CPF pode funcionar em um teste e não funcionar no outro.
+Certifique-se de ter instalado em sua máquina:
 
+- **Docker** e **Docker Compose** (versão 3.8 ou superior)
+- **Java 17**
+- **Gradle** (para compilar o projeto)
+
+---
+
+## Configuração e Execução
+
+### 1. Clonar o Repositório
+```bash
+git clone o projeto
+cd votacao-app
 ```
-// CPF Ok para votar
-{
-    "status": "ABLE_TO_VOTE
-}
-// CPF Nao Ok para votar - retornar 404 no client tb
-{
-    "status": "UNABLE_TO_VOTE
-}
+
+### 2. Construir e Executar com Docker Compose
+
+No diretório raiz do projeto, execute:
+```bash
+docker-compose up --build
 ```
 
-Exemplos de retorno do serviço
+### 3. Verificar os Contêineres em Execução
 
-### Tarefa Bônus 2 - Performance
+Certifique-se de que os contêineres estão em execução:
+```bash
+docker ps
+```
 
-- Imagine que sua aplicação possa ser usada em cenários que existam centenas de
-  milhares de votos. Ela deve se comportar de maneira performática nesses
-  cenários
-- Testes de performance são uma boa maneira de garantir e observar como sua
-  aplicação se comporta
+### 4. Acessar a Aplicação
 
-### Tarefa Bônus 3 - Versionamento da API
+A API estará disponível em:
+```plaintext
+http://localhost:8081
+```
 
-○ Como você versionaria a API da sua aplicação? Que estratégia usar?
+---
 
-## O que será analisado
+## Endpoints da API
 
-- Simplicidade no design da solução (evitar over engineering)
-- Organização do código
-- Arquitetura do projeto
-- Boas práticas de programação (manutenibilidade, legibilidade etc)
-- Possíveis bugs
-- Tratamento de erros e exceções
-- Explicação breve do porquê das escolhas tomadas durante o desenvolvimento da solução
-- Uso de testes automatizados e ferramentas de qualidade
-- Limpeza do código
-- Documentação do código e da API
-- Logs da aplicação
-- Mensagens e organização dos commits
-- Testes
-- Layout responsivo
+### **Pautas**
+- **POST** `/pautas`: Cadastrar uma nova pauta.
+- **GET** `/pautas`: Listar todas as pautas.
+- **GET** `/pautas/{id}`: Consultar uma pauta pelo ID.
 
-## Dicas
+### **Sessões de Votação**
+- **POST** `/sessoes`: Abrir uma nova sessão de votação.
+- **GET** `/sessoes`: Listar todas as sessões.
+- **GET** `/sessoes/{id}`: Consultar uma sessão pelo ID.
 
-- Teste bem sua solução, evite bugs
+### **Votos**
+- **POST** `/votos`: Registrar um voto em uma sessão.
+- **GET** `/sessoes/{id}/resultado`: Consultar o resultado da votação em uma sessão.
 
-  Observações importantes
-- Não inicie o teste sem sanar todas as dúvidas
-- Iremos executar a aplicação para testá-la, cuide com qualquer dependência externa e
-  deixe claro caso haja instruções especiais para execução do mesmo
-  Classificação da informação: Uso Interno
+---
 
+## Variáveis de Ambiente
 
+As seguintes variáveis de ambiente estão configuradas no arquivo `docker-compose.yml`:
 
-# desafio-votacao
+| Variável                  | Descrição                        |
+|---------------------------|------------------------------------|
+| `SPRING_DATASOURCE_URL`   | URL de conexão com o banco de dados |
+| `SPRING_DATASOURCE_USERNAME` | Usuário do banco de dados          |
+| `SPRING_DATASOURCE_PASSWORD` | Senha do banco de dados           |
+| `SPRING_JPA_HIBERNATE_DDL_AUTO` | Estratégia de inicialização do banco |
+| `SPRING_FLYWAY_ENABLED`   | Habilitar Flyway                  |
+| `SPRING_FLYWAY_LOCATIONS` | Caminho dos scripts Flyway        |
+
+---
+
+## Banco de Dados
+
+O PostgreSQL é inicializado com as seguintes credenciais:
+
+- **Usuário**: postgres
+- **Senha**: postgres
+- **Nome do banco**: votacao
+
+O volume `postgres_data` é utilizado para persistência dos dados.
+
+---
+
+## Migrações do Banco de Dados
+
+As migrações do banco de dados são gerenciadas pelo Flyway. Os scripts de migração devem ser colocados na pasta `src/main/resources/db/migration` com o formato:
+
+Exemplo:
+```plaintext
+V1__criar_tabela_pauta.sql
+```
+
+---
+
+## Testes
+
+### Executar os Testes Unitários
+
+Para executar os testes unitários, utilize:
+```bash
+./gradlew test
+```
+
+---
+
+## Melhorias Futuras
+
+- Implementar autenticação e autorização.
+- Adicionar paginação aos endpoints de listagem.
+
