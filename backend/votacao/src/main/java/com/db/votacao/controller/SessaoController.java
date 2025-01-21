@@ -20,10 +20,10 @@ public class SessaoController {
     private final SessaoVotacaoService sessaoVotacaoService;
 
     @PostMapping
-    public ResponseEntity<Sessao> abrirSessaoVotacao(
+    public ResponseEntity<SessaoResponseDTO> abrirSessaoVotacao(
             @RequestParam Long pautaId,
             @RequestParam(required = false) Integer tempoEmMinutos) {
-        Sessao novaSessao = sessaoVotacaoService.abrirSessaoVotacao(pautaId, tempoEmMinutos);
+        SessaoResponseDTO novaSessao = sessaoVotacaoService.abrirSessaoVotacao(pautaId, tempoEmMinutos);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaSessao);
     }
 

@@ -25,7 +25,7 @@ public class SessaoVotacaoService {
     private final SessaoMapper sessaoMapper;
 
     @Transactional
-    public Sessao abrirSessaoVotacao(Long pautaId, Integer tempoEmMinutos) {
+    public SessaoResponseDTO abrirSessaoVotacao(Long pautaId, Integer tempoEmMinutos) {
 
         Pauta pauta = pautaRepository.findById(pautaId)
                 .orElseThrow(() -> new RuntimeException("Pauta não encontrada"));
@@ -33,7 +33,7 @@ public class SessaoVotacaoService {
         Sessao sessaoVotacao = new Sessao();
         sessaoVotacao.setPauta(pauta);
         sessaoVotacao.verificaTempoFechamentoSessao(tempoEmMinutos);
-        return sessaoRepository.save(sessaoVotacao);
+        return sessaoMapper.toResponseDTO(sessaoRepository.save(sessaoVotacao));
     }
 
     public List<SessaoResponseDTO> listarTodasSessoes() {
